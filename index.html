@@ -41,6 +41,42 @@
             --progress-bar-bg: rgba(255, 255, 255, 0.1);
         }
 
+        /* --- Responsive Font Size Setup --- */
+        html {
+            /* Set a base font size for the document. 16px is a common default. */
+            font-size: 16px;
+        }
+
+        /* For tablets and smaller devices */
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        /* For mobile phones */
+        @media (max-width: 480px) {
+            html {
+                font-size: 12px;
+            }
+
+            /* Further refine heading sizes on very small screens to prevent overflow */
+            h1 {
+                font-size: 2rem;
+            }
+
+            .collapsible {
+                font-size: 1.3rem;
+            }
+
+            .sub-collapsible {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* --- End Responsive Font Size Setup --- */
+
+
         /* General Body Styling */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -512,4 +548,3 @@
 </body>
 
 </html>
-
