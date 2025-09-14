@@ -7,39 +7,44 @@
     <title>A2Z DSA Course Roadmap</title>
     <style>
         :root {
-            /* Midnight Neon Palette - Enhanced Contrast */
-            --primary-color: #8ea1e9;
-            /* Brighter Discord Blue for better contrast */
-            --secondary-color: #4e5d94;
-            /* Darker Blue */
-            --tertiary-color: #43b581;
-            /* Green */
-            --tertiary-hover-color: #3aa171;
-            /* Darker Green */
-            --light-gray: #2c2f33;
-            /* Almost Black */
-            --medium-gray: #23272a;
-            /* Darker Background */
-            --dark-gray: #e0e4e8;
-            /* Even Lighter Gray Text for better contrast */
-            --text-color: #ffffff;
+            /* New theme based on the image provided */
+            --primary-color: #363f5f;
+            /* Main blue for collapsible headers */
+            --primary-hover-color: #4a5588;
+            /* Lighter blue for hover */
+            --success-color: #33a950;
+            /* Green for completed sections */
+            --success-hover-color: #45a049;
+            /* Lighter green for hover on completed */
+
+            --medium-gray: #1e2124;
+            /* Main page background */
+            --white-color: #2d2d2d;
+            /* Container background */
             --border-color: #40444b;
-            --white-color: #36393f;
-            /* Container Background */
-            --link-color: var(--primary-color);
-            --success-color: #43b581;
-            /* Bright Green */
+            /* Borders for container and tables */
+
+            --text-color: #ffffff;
+            /* Main text color */
+            --dark-gray: #e0e4e8;
+            /* Text color for table headers */
+            --light-gray: #2c2f33;
+            /* Background for table headers */
+
+            --link-color: #8ea1e9;
+            /* Link color */
             --warning-color: #faa61a;
-            /* Bright Yellow */
+            /* Difficulty indicator: Medium */
             --danger-color: #f04747;
-            /* Bright Red */
-            --completed-bg-color: rgba(67, 181, 129, 0.1);
+            /* Difficulty indicator: Hard */
+
+            --completed-bg-color: rgba(51, 169, 80, 0.1);
+            /* Row highlight for completed topics */
             --completed-text-color: #63e6be;
-            /* Brighter Green for completed text */
-            --completed-gradient-start: #43b581;
-            --completed-gradient-end: #57f287;
-            --progress-bar-bg: rgba(87, 242, 135, 0.5);
-            /* Even brighter for high contrast */
+            /* Text color for completed topics */
+
+            /* Progress bar is a semi-transparent overlay that works on blue and green backgrounds */
+            --progress-bar-bg: var(--success-color);
         }
 
         /* --- Responsive Font Size Setup --- */
@@ -103,7 +108,7 @@
         h1 {
             text-align: center;
             font-size: 2.25rem;
-            color: var(--primary-color);
+            color: var(--text-color);
             border-bottom: 3px solid var(--border-color);
             padding-bottom: 0.75rem;
             margin-bottom: 1.5rem;
@@ -124,10 +129,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-image 0.4s ease;
+            transition: background-color 0.4s ease;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            background-color: var(--primary-color);
         }
 
         /* Progress Bar Pseudo-element */
@@ -141,40 +147,35 @@
             width: var(--progress-width, 0%);
             background-color: var(--progress-bar-bg);
             transition: width 0.4s ease-out, background-color 0.4s ease;
-            z-index: -1;
+            z-index: 1;
             border-radius: 10px;
         }
 
         .collapsible {
-            background-image: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
             font-size: 1.5rem;
         }
 
         .sub-collapsible {
-            background-image: linear-gradient(45deg, var(--tertiary-color), var(--tertiary-hover-color));
             font-size: 1.2rem;
         }
 
         .collapsible:hover,
-        .collapsible.active {
-            background-image: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-        }
-
+        .collapsible.active,
         .sub-collapsible:hover,
         .sub-collapsible.active {
-            background-image: linear-gradient(45deg, var(--tertiary-hover-color), var(--tertiary-color));
+            background-color: var(--primary-hover-color);
         }
 
         .collapsible.completed,
         .sub-collapsible.completed {
-            background-image: linear-gradient(45deg, var(--completed-gradient-start), var(--completed-gradient-end));
+            background-color: var(--success-color);
         }
 
-        .collapsible.completed::before,
-        .sub-collapsible.completed::before {
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.25);
-            /* More prominent sheen for completed items */
+        .collapsible.completed:hover,
+        .collapsible.completed.active,
+        .sub-collapsible.completed:hover,
+        .sub-collapsible.completed.active {
+            background-color: var(--success-hover-color);
         }
 
         .collapsible-title {
@@ -189,6 +190,14 @@
             border-radius: 1rem;
             margin-left: 1rem;
             white-space: nowrap;
+        }
+
+        .collapsible-title,
+        .progress-counter,
+        .collapsible::after,
+        .sub-collapsible::after {
+            position: relative;
+            z-index: 2;
         }
 
         .collapsible::after,
