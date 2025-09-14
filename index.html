@@ -143,6 +143,13 @@
             padding: 0 0.5rem;
         }
 
+        /* NEW: Wrapper for scrollable tables */
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            /* For smooth scrolling on iOS */
+        }
+
         /* Table Styling */
         table {
             width: 100%;
@@ -150,6 +157,8 @@
             margin: 0.75rem 0;
             border: 1px solid var(--border-color);
             table-layout: fixed;
+            min-width: 700px;
+            /* Ensures table has a minimum width to scroll */
         }
 
         th,
@@ -303,20 +312,21 @@
                                     <span class="progress-counter">${completedSubStepTopics}/${totalSubStepTopics}</span>
                                 </button>
                                 <div class="sub-content">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Topic</th>
-                                                <th title="Article/Post">Post</th>
-                                                <th title="YouTube">YT</th>
-                                                <th title="TakeUForward+">TUF</th>
-                                                <th title="GeeksForGeeks">GFG</th>
-                                                <th title="CodingNinjas">CN</th>
-                                                <th title="LeetCode">LC</th>
-                                                <th>Done</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>`;
+                                    <div class="table-container">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Topic</th>
+                                                    <th title="Article/Post">Post</th>
+                                                    <th title="YouTube">YT</th>
+                                                    <th title="TakeUForward+">TUF</th>
+                                                    <th title="GeeksForGeeks">GFG</th>
+                                                    <th title="CodingNinjas">CN</th>
+                                                    <th title="LeetCode">LC</th>
+                                                    <th>Done</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>`;
                         subStep.topics.forEach(topic => {
                             const isCompleted = progress[topic.id] || false;
                             const difficultyClass = getDifficultyClass(topic.difficulty);
@@ -330,24 +340,25 @@
                                 } catch (e) { /* Gracefully fail */ }
                             }
                             subStepsHtml += `
-                                            <tr class="${difficultyClass} ${completedClass}" data-topic-id="${topic.id}">
-                                                <td class="topic-cell" title="${tooltipText}">
-                                                    <div class="topic-title">${topic.question_title}</div>
-                                                </td>
-                                                ${createLinkCell(topic.post_link, 'Post')}
-                                                ${createLinkCell(topic.yt_link, 'YT')}
-                                                ${createLinkCell(topic.plus_link, 'TUF')}
-                                                ${createLinkCell(topic.gfg_link, 'GFG')}
-                                                ${createLinkCell(topic.cs_link, 'CN')}
-                                                ${createLinkCell(topic.lc_link, 'LC')}
-                                                <td class="status-cell">
-                                                    <input type="checkbox" class="status-checkbox" data-id="${topic.id}" ${checkedAttr}>
-                                                </td>
-                                            </tr>`;
+                                                <tr class="${difficultyClass} ${completedClass}" data-topic-id="${topic.id}">
+                                                    <td class="topic-cell" title="${tooltipText}">
+                                                        <div class="topic-title">${topic.question_title}</div>
+                                                    </td>
+                                                    ${createLinkCell(topic.post_link, 'Post')}
+                                                    ${createLinkCell(topic.yt_link, 'YT')}
+                                                    ${createLinkCell(topic.plus_link, 'TUF')}
+                                                    ${createLinkCell(topic.gfg_link, 'GFG')}
+                                                    ${createLinkCell(topic.cs_link, 'CN')}
+                                                    ${createLinkCell(topic.lc_link, 'LC')}
+                                                    <td class="status-cell">
+                                                        <input type="checkbox" class="status-checkbox" data-id="${topic.id}" ${checkedAttr}>
+                                                    </td>
+                                                </tr>`;
                         });
                         subStepsHtml += `
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>`;
                     });
                 }
