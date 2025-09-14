@@ -7,31 +7,44 @@
     <title>A2Z DSA Course Roadmap</title>
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --tertiary-color: #16a085;
-            --tertiary-hover-color: #1abc9c;
-            --light-gray: #f8f9fa;
-            --medium-gray: #e9ecef;
-            --dark-gray: #495057;
-            --text-color: #343a40;
-            --border-color: #dee2e6;
-            --white-color: #ffffff;
-            --link-color: var(--secondary-color);
-            --success-color: #2ecc71;
-            --warning-color: #f1c40f;
-            --danger-color: #e74c3c;
-            --completed-bg-color: #e8f5e9;
-            --completed-text-color: #388e3c;
-            --completed-gradient-start: #27ae60;
-            --completed-gradient-end: #2ecc71;
+            /* Midnight Neon Palette */
+            --primary-color: #7289da;
+            /* Discord Blue */
+            --secondary-color: #4e5d94;
+            /* Darker Blue */
+            --tertiary-color: #43b581;
+            /* Green */
+            --tertiary-hover-color: #3aa171;
+            /* Darker Green */
+            --light-gray: #2c2f33;
+            /* Almost Black */
+            --medium-gray: #23272a;
+            /* Darker Background */
+            --dark-gray: #99aab5;
+            /* Light Gray Text */
+            --text-color: #ffffff;
+            --border-color: #40444b;
+            --white-color: #36393f;
+            /* Container Background */
+            --link-color: var(--primary-color);
+            --success-color: #43b581;
+            /* Bright Green */
+            --warning-color: #faa61a;
+            /* Bright Yellow */
+            --danger-color: #f04747;
+            /* Bright Red */
+            --completed-bg-color: rgba(67, 181, 129, 0.1);
+            --completed-text-color: var(--success-color);
+            --completed-gradient-start: #43b581;
+            --completed-gradient-end: #57f287;
+            --progress-bar-bg: rgba(255, 255, 255, 0.1);
         }
 
         /* General Body Styling */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.5;
-            background-color: var(--light-gray);
+            line-height: 1.6;
+            background-color: var(--medium-gray);
             color: var(--text-color);
             margin: 0;
             padding: 1rem;
@@ -43,19 +56,19 @@
             margin: 1rem auto;
             background-color: var(--white-color);
             padding: 1rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
         }
 
         /* Heading Styles */
         h1 {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.25rem;
             color: var(--primary-color);
-            border-bottom: 2px solid var(--medium-gray);
-            padding-bottom: 0.6rem;
-            margin-bottom: 1rem;
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
         }
 
         /* Collapsible Section Styles */
@@ -63,17 +76,35 @@
         .sub-collapsible {
             color: #fff;
             cursor: pointer;
-            padding: 0.75rem 1rem;
+            padding: 0.85rem 1.25rem;
             width: 100%;
             border: none;
             text-align: left;
             outline: none;
             margin-top: 0.75rem;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-image 0.3s ease;
+            transition: background-image 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Progress Bar Pseudo-element */
+        .collapsible::before,
+        .sub-collapsible::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: var(--progress-width, 0%);
+            background-color: var(--progress-bar-bg);
+            transition: width 0.4s ease-out, background-color 0.4s ease;
+            z-index: -1;
+            border-radius: 10px;
         }
 
         .collapsible {
@@ -101,6 +132,12 @@
             background-image: linear-gradient(45deg, var(--completed-gradient-start), var(--completed-gradient-end));
         }
 
+        .collapsible.completed::before,
+        .sub-collapsible.completed::before {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
         .collapsible-title {
             flex-grow: 1;
         }
@@ -108,7 +145,7 @@
         .progress-counter {
             font-size: 0.7em;
             font-weight: 500;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.25);
             padding: 0.2rem 0.6rem;
             border-radius: 1rem;
             margin-left: 1rem;
@@ -143,11 +180,9 @@
             padding: 0 0.5rem;
         }
 
-        /* NEW: Wrapper for scrollable tables */
         .table-container {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
-            /* For smooth scrolling on iOS */
         }
 
         /* Table Styling */
@@ -158,13 +193,12 @@
             border: 1px solid var(--border-color);
             table-layout: fixed;
             min-width: 700px;
-            /* Ensures table has a minimum width to scroll */
         }
 
         th,
         td {
             border: 1px solid var(--border-color);
-            padding: 0.5rem 0.4rem;
+            padding: 0.6rem 0.5rem;
             text-align: center;
             vertical-align: middle;
             word-wrap: break-word;
@@ -187,32 +221,42 @@
         }
 
         thead th {
-            background-color: var(--secondary-color);
-            color: #fff;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
             font-weight: 600;
         }
 
         /* Difficulty & Completion Styles */
+        tr {
+            color: var(--dark-gray);
+        }
+
         tr.completed {
             background-color: var(--completed-bg-color) !important;
-            color: var(--completed-text-color);
+            color: var(--completed-text-color) !important;
+        }
+
+        tr.completed .topic-title {
+            text-decoration: line-through;
+            text-decoration-color: var(--completed-text-color);
+            text-decoration-thickness: 2px;
         }
 
         tr.completed a {
-            color: var(--completed-text-color);
+            color: var(--completed-text-color) !important;
             font-weight: 500;
         }
 
         .difficulty-easy td:first-child {
-            box-shadow: inset 4px 0 0 0 var(--success-color);
+            box-shadow: inset 5px 0 0 0 var(--success-color);
         }
 
         .difficulty-medium td:first-child {
-            box-shadow: inset 4px 0 0 0 var(--warning-color);
+            box-shadow: inset 5px 0 0 0 var(--warning-color);
         }
 
         .difficulty-hard td:first-child {
-            box-shadow: inset 4px 0 0 0 var(--danger-color);
+            box-shadow: inset 5px 0 0 0 var(--danger-color);
         }
 
         /* Link & SVG Styling */
@@ -222,7 +266,7 @@
         }
 
         .link-cell:hover {
-            background-color: var(--medium-gray);
+            background-color: var(--light-gray);
         }
 
         .link-cell a {
@@ -237,27 +281,25 @@
         }
 
         .link-cell svg {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             fill: currentColor;
         }
 
-        /* 'Not Applicable' Cell Styling */
         .na-cell {
             color: #bdc3c7;
             font-size: 1.2rem;
             font-weight: 600;
         }
 
-        /* Custom Checkbox */
         .status-cell {
             cursor: pointer;
         }
 
         .status-checkbox {
             pointer-events: none;
-            width: 1.2rem;
-            height: 1.2rem;
+            width: 1.3rem;
+            height: 1.3rem;
         }
     </style>
 </head>
@@ -269,7 +311,6 @@
     <script>
         const STORAGE_KEY = 'dsaRoadmapProgress';
 
-        // SVG logos for platforms, standardized to 24x24px
         const platformLogos = {
             'Post': `<img src="./assets/logo/post.svg" alt="BLOG">`,
             'YT': `<img src="./assets/logo/yt.svg" alt="YT">`,
@@ -302,12 +343,13 @@
                         const totalSubStepTopics = subStep.topics.length;
                         const completedSubStepTopics = subStep.topics.filter(t => progress[t.id]).length;
                         const isSubStepComplete = totalSubStepTopics > 0 && completedSubStepTopics === totalSubStepTopics;
-                        const subStepCompletedClass = isSubStepComplete ? 'completed' : '';
+                        const subStepProgressClass = isSubStepComplete ? 'completed' : '';
+                        const subStepPercentage = totalSubStepTopics > 0 ? (completedSubStepTopics / totalSubStepTopics) * 100 : 0;
                         totalStepTopics += totalSubStepTopics;
                         completedStepTopics += completedSubStepTopics;
 
                         subStepsHtml += `
-                                <button type="button" class="sub-collapsible ${subStepCompletedClass}" data-step="${step.step_no}" data-substep="${subStep.sub_step_no}">
+                                <button type="button" class="sub-collapsible ${subStepProgressClass}" style="--progress-width: ${subStepPercentage}%" data-step="${step.step_no}" data-substep="${subStep.sub_step_no}">
                                     <span class="collapsible-title">${subStep.sub_step_no}. ${subStep.sub_step_title.replace(/\n/g, ' ')}</span>
                                     <span class="progress-counter">${completedSubStepTopics}/${totalSubStepTopics}</span>
                                 </button>
@@ -332,16 +374,9 @@
                             const difficultyClass = getDifficultyClass(topic.difficulty);
                             const completedClass = isCompleted ? 'completed' : '';
                             const checkedAttr = isCompleted ? 'checked' : '';
-                            let tooltipText = '';
-                            if (topic.ques_topic) {
-                                try {
-                                    const topics = JSON.parse(topic.ques_topic);
-                                    tooltipText = topics.map(t => t.label).join(', ');
-                                } catch (e) { /* Gracefully fail */ }
-                            }
                             subStepsHtml += `
                                                 <tr class="${difficultyClass} ${completedClass}" data-topic-id="${topic.id}">
-                                                    <td class="topic-cell" title="${tooltipText}">
+                                                    <td class="topic-cell">
                                                         <div class="topic-title">${topic.question_title}</div>
                                                     </td>
                                                     ${createLinkCell(topic.post_link, 'Post')}
@@ -363,9 +398,10 @@
                     });
                 }
                 const isStepComplete = totalStepTopics > 0 && completedStepTopics === totalStepTopics;
-                const stepCompletedClass = isStepComplete ? 'completed' : '';
+                const stepProgressClass = isStepComplete ? 'completed' : '';
+                const stepPercentage = totalStepTopics > 0 ? (completedStepTopics / totalStepTopics) * 100 : 0;
                 htmlContent += `
-                            <button type="button" class="collapsible ${stepCompletedClass}" data-step="${step.step_no}">
+                            <button type="button" class="collapsible ${stepProgressClass}" style="--progress-width: ${stepPercentage}%" data-step="${step.step_no}">
                                 <span class="collapsible-title">Step ${step.step_no}: ${step.step_title}</span>
                                 <span class="progress-counter">${completedStepTopics}/${totalStepTopics}</span>
                             </button>
@@ -377,22 +413,14 @@
         function createLinkCell(url, label) {
             if (url) {
                 const logo = platformLogos[label] || label;
-                return `
-                                <td class="link-cell">
-                                    <a href="${url}" target="_blank" rel="noopener noreferrer" title="${label}">${logo}</a>
-                                </td>`;
+                return `<td class="link-cell"><a href="${url}" target="_blank" rel="noopener noreferrer" title="${label}">${logo}</a></td>`;
             } else {
                 return `<td class="na-cell">-</td>`;
             }
         }
 
         function getDifficultyClass(difficulty) {
-            const difficultyMap = {
-                0: 'difficulty-easy',
-                1: 'difficulty-medium',
-                2: 'difficulty-hard'
-            };
-            return difficultyMap[difficulty] || '';
+            return ['difficulty-easy', 'difficulty-medium', 'difficulty-hard'][difficulty] || '';
         }
 
         function loadCompletionState() {
@@ -422,8 +450,10 @@
                 const totalSubStep = topicsInSubStep.length;
                 const completedSubStep = topicsInSubStep.filter(cb => progress[cb.dataset.id]).length;
                 subStepButton.querySelector('.progress-counter').textContent = `${completedSubStep}/${totalSubStep}`;
-                const isSubStepComplete = totalSubStep > 0 && completedSubStep === totalSubStep;
-                subStepButton.classList.toggle('completed', isSubStepComplete);
+
+                const subStepPercentage = totalSubStep > 0 ? (completedSubStep / totalSubStep) * 100 : 0;
+                subStepButton.style.setProperty('--progress-width', `${subStepPercentage}%`);
+                subStepButton.classList.toggle('completed', totalSubStep > 0 && completedSubStep === totalSubStep);
             }
             const mainContent = element.closest('.content');
             if (mainContent) {
@@ -432,8 +462,10 @@
                 const totalStep = topicsInStep.length;
                 const completedStep = topicsInStep.filter(cb => progress[cb.dataset.id]).length;
                 mainStepButton.querySelector('.progress-counter').textContent = `${completedStep}/${totalStep}`;
-                const isStepComplete = totalStep > 0 && completedStep === totalStep;
-                mainStepButton.classList.toggle('completed', isStepComplete);
+
+                const stepPercentage = totalStep > 0 ? (completedStep / totalStep) * 100 : 0;
+                mainStepButton.style.setProperty('--progress-width', `${stepPercentage}%`);
+                mainStepButton.classList.toggle('completed', totalStep > 0 && completedStep === totalStep);
             }
         }
 
@@ -448,15 +480,11 @@
                     const content = collapsible.nextElementSibling;
                     if (content.style.maxHeight) {
                         content.style.maxHeight = null;
-                        const parentContent = collapsible.closest('.content');
-                        if (parentContent && parentContent.style.maxHeight) {
-                            parentContent.style.maxHeight = (parseInt(parentContent.style.maxHeight) - content.scrollHeight) + "px";
-                        }
                     } else {
                         content.style.maxHeight = content.scrollHeight + "px";
-                        const parentContent = collapsible.closest('.content');
+                        const parentContent = content.closest('.content');
                         if (parentContent && parentContent.style.maxHeight) {
-                            parentContent.style.maxHeight = (parseInt(parentContent.style.maxHeight) + content.scrollHeight) + "px";
+                            parentContent.style.maxHeight = (parentContent.scrollHeight + content.scrollHeight) + "px";
                         }
                     }
                 }
@@ -470,10 +498,7 @@
                         const progress = loadCompletionState();
                         progress[topicId] = isChecked;
                         saveCompletionState(progress);
-                        const row = checkbox.closest('tr');
-                        if (row) {
-                            row.classList.toggle('completed', isChecked);
-                        }
+                        checkbox.closest('tr').classList.toggle('completed', isChecked);
                         updateCounters(checkbox);
                     }
                 }
