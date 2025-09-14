@@ -7,9 +7,9 @@
     <title>A2Z DSA Course Roadmap</title>
     <style>
         :root {
-            /* Midnight Neon Palette */
-            --primary-color: #7289da;
-            /* Discord Blue */
+            /* Midnight Neon Palette - Enhanced Contrast */
+            --primary-color: #8ea1e9;
+            /* Brighter Discord Blue for better contrast */
             --secondary-color: #4e5d94;
             /* Darker Blue */
             --tertiary-color: #43b581;
@@ -20,8 +20,8 @@
             /* Almost Black */
             --medium-gray: #23272a;
             /* Darker Background */
-            --dark-gray: #99aab5;
-            /* Light Gray Text */
+            --dark-gray: #e0e4e8;
+            /* Even Lighter Gray Text for better contrast */
             --text-color: #ffffff;
             --border-color: #40444b;
             --white-color: #36393f;
@@ -34,7 +34,8 @@
             --danger-color: #f04747;
             /* Bright Red */
             --completed-bg-color: rgba(67, 181, 129, 0.1);
-            --completed-text-color: var(--success-color);
+            --completed-text-color: #63e6be;
+            /* Brighter Green for completed text */
             --completed-gradient-start: #43b581;
             --completed-gradient-end: #57f287;
             --progress-bar-bg: rgba(255, 255, 255, 0.1);
@@ -306,7 +307,7 @@
         const STORAGE_KEY = 'dsaRoadmapProgress';
 
         const platformLogos = {
-            'Post': `<img src="./assets/logo/post.svg" alt="BLOG">`,
+            'BLOG': `<img src="./assets/logo/post.svg" alt="BLOG">`,
             'YT': `<img src="./assets/logo/yt.svg" alt="YT">`,
             'TUF': `<img src="./assets/logo/tuf.svg" alt="TUF">`,
             'GFG': `<img src="./assets/logo/gfg.svg" alt="GFG">`,
@@ -353,12 +354,12 @@
                                             <thead>
                                                 <tr>
                                                     <th>Topic</th>
-                                                    <th title="Article/Post">Post</th>
+                                                    <th title="Blog">BLOG</th>
                                                     <th title="YouTube">YT</th>
-                                                    <th title="TakeUForward+">TUF</th>
+                                                    <th title="LeetCode">LC</th>
                                                     <th title="GeeksForGeeks">GFG</th>
                                                     <th title="CodingNinjas">CN</th>
-                                                    <th title="LeetCode">LC</th>
+                                                    <th title="TakeUForward+">TUF</th>
                                                     <th>Done</th>
                                                 </tr>
                                             </thead>
@@ -373,12 +374,12 @@
                                                     <td class="topic-cell">
                                                         <div class="topic-title">${topic.question_title}</div>
                                                     </td>
-                                                    ${createLinkCell(topic.post_link, 'Post')}
+                                                    ${createLinkCell(topic.post_link, 'BLOG')}
                                                     ${createLinkCell(topic.yt_link, 'YT')}
-                                                    ${createLinkCell(topic.plus_link, 'TUF')}
+                                                    ${createLinkCell(topic.lc_link, 'LC')}
                                                     ${createLinkCell(topic.gfg_link, 'GFG')}
                                                     ${createLinkCell(topic.cs_link, 'CN')}
-                                                    ${createLinkCell(topic.lc_link, 'LC')}
+                                                    ${createLinkCell(topic.plus_link, 'TUF')}
                                                     <td class="status-cell">
                                                         <input type="checkbox" class="status-checkbox" data-id="${topic.id}" ${checkedAttr}>
                                                     </td>
@@ -511,3 +512,4 @@
 </body>
 
 </html>
+
