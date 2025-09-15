@@ -240,7 +240,8 @@
             margin: 0.75rem 0;
             border: 1px solid var(--border-color);
             table-layout: fixed;
-            min-width: 700px;
+            min-width: 800px;
+            /* Increased from 700px to accommodate extra column */
         }
 
         th,
@@ -255,12 +256,14 @@
         .topic-cell {
             text-align: left;
             font-weight: 500;
-            width: 40%;
+            width: 35%;
+            /* Reduced from 40% to make room for extra column */
         }
 
         thead th:not(:first-child),
         tbody td:not(.topic-cell) {
-            width: 8.57%;
+            width: 8.13%;
+            /* Adjusted to accommodate 8 columns instead of 7 */
         }
 
         .topic-title {
@@ -359,7 +362,8 @@
             'TUF': `<img src="./assets/logo/tuf.svg" alt="TUF">`,
             'GFG': `<img src="./assets/logo/gfg.svg" alt="GFG">`,
             'CN': `<img src="./assets/logo/cn.svg" alt="CN">`,
-            'LC': `<img src="./assets/logo/lc.svg" alt="LC">`
+            'LC': `<img src="./assets/logo/lc.svg" alt="LC">`,
+            'ALT': `<img src="./assets/logo/alt.svg" alt="ALT">`
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -372,6 +376,28 @@
                 addEventListeners();
             }).catch(handleError);
         });
+
+        // Function to generate alternate link from original post_link
+        function generateAlternateLink(postLink) {
+            if (!postLink) return null;
+
+            try {
+                const url = new URL(postLink);
+                const pathParts = url.pathname.split('/').filter(part => part.length > 0);
+
+                // Convert from https://takeuforward.org/category/article-name/ 
+                // to articles/category/article-name.html
+                if (pathParts.length >= 2) {
+                    const category = pathParts[0];
+                    const articleName = pathParts[1];
+                    return `articles/${category}/${articleName}.html`;
+                }
+            } catch (error) {
+                console.warn('Could not generate alternate link for:', postLink);
+            }
+
+            return null;
+        }
 
         function generateRoadmap(data, progress) {
             const container = document.getElementById('roadmap-container');
@@ -402,6 +428,7 @@
                                                 <tr>
                                                     <th>Topic</th>
                                                     <th title="Blog">BLOG</th>
+                                                    <th title="Alternate Article">ALT</th>
                                                     <th title="YouTube">YT</th>
                                                     <th title="LeetCode">LC</th>
                                                     <th title="GeeksForGeeks">GFG</th>
@@ -416,12 +443,15 @@
                             const difficultyClass = getDifficultyClass(topic.difficulty);
                             const completedClass = isCompleted ? 'completed' : '';
                             const checkedAttr = isCompleted ? 'checked' : '';
+                            const alternateLink = generateAlternateLink(topic.post_link);
+
                             subStepsHtml += `
                                                 <tr class="${difficultyClass} ${completedClass}" data-topic-id="${topic.id}">
                                                     <td class="topic-cell">
                                                         <div class="topic-title">${topic.question_title}</div>
                                                     </td>
                                                     ${createLinkCell(topic.post_link, 'BLOG')}
+                                                    ${createLinkCell(alternateLink, 'ALT')}
                                                     ${createLinkCell(topic.yt_link, 'YT')}
                                                     ${createLinkCell(topic.lc_link, 'LC')}
                                                     ${createLinkCell(topic.gfg_link, 'GFG')}
