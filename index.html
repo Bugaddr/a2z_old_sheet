@@ -115,7 +115,7 @@
         }
 
         /* Collapsible Section Styles */
-        .collapsible,
+        .collapsible, 
         .sub-collapsible {
             color: #fff;
             cursor: pointer;
@@ -137,7 +137,7 @@
         }
 
         /* Progress Bar Pseudo-element */
-        .collapsible::before,
+        .collapsible::before, 
         .sub-collapsible::before {
             content: '';
             position: absolute;
@@ -159,21 +159,21 @@
             font-size: 1.2rem;
         }
 
-        .collapsible:hover,
-        .collapsible.active,
-        .sub-collapsible:hover,
+        .collapsible:hover, 
+        .collapsible.active, 
+        .sub-collapsible:hover, 
         .sub-collapsible.active {
             background-color: var(--primary-hover-color);
         }
 
-        .collapsible.completed,
+        .collapsible.completed, 
         .sub-collapsible.completed {
             background-color: var(--success-color);
         }
 
-        .collapsible.completed:hover,
-        .collapsible.completed.active,
-        .sub-collapsible.completed:hover,
+        .collapsible.completed:hover, 
+        .collapsible.completed.active, 
+        .sub-collapsible.completed:hover, 
         .sub-collapsible.completed.active {
             background-color: var(--success-hover-color);
         }
@@ -192,15 +192,15 @@
             white-space: nowrap;
         }
 
-        .collapsible-title,
-        .progress-counter,
-        .collapsible::after,
+        .collapsible-title, 
+        .progress-counter, 
+        .collapsible::after, 
         .sub-collapsible::after {
             position: relative;
             z-index: 2;
         }
 
-        .collapsible::after,
+        .collapsible::after, 
         .sub-collapsible::after {
             content: '+';
             font-size: 1.5em;
@@ -209,12 +209,12 @@
             margin-left: 1rem;
         }
 
-        .collapsible.active::after,
+        .collapsible.active::after, 
         .sub-collapsible.active::after {
             transform: rotate(45deg);
         }
 
-        .content,
+        .content, 
         .sub-content {
             max-height: 0;
             overflow: hidden;
@@ -244,7 +244,7 @@
             /* Increased from 700px to accommodate extra column */
         }
 
-        th,
+        th, 
         td {
             border: 1px solid var(--border-color);
             padding: 0.6rem 0.5rem;
@@ -260,7 +260,7 @@
             /* Reduced from 40% to make room for extra column */
         }
 
-        thead th:not(:first-child),
+        thead th:not(:first-child), 
         tbody td:not(.topic-cell) {
             width: 8.13%;
             /* Adjusted to accommodate 8 columns instead of 7 */
@@ -392,7 +392,8 @@
             'GFG': `<img src="./assets/logo/gfg.svg" alt="GFG">`,
             'CN': `<img src="./assets/logo/cn.svg" alt="CN">`,
             'LC': `<img src="./assets/logo/lc.svg" alt="LC">`,
-            'ALT': `<img src="./assets/logo/alt.svg" alt="ALT">`
+            'ALT': `<img src="./assets/logo/alt.svg" alt="ALT">
+`
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -443,7 +444,7 @@
                         const subStepProgressClass = isSubStepComplete ? 'completed' : '';
                         const subStepPercentage = totalSubStepTopics > 0 ? (completedSubStepTopics / totalSubStepTopics) * 100 : 0;
                         totalStepTopics += totalSubStepTopics;
-                        completedStepTopics += completedStepTopics;
+                        completedStepTopics += completedSubStepTopics;
 
                         subStepsHtml += `
                                 <button type="button" class="sub-collapsible ${subStepProgressClass}" style="--progress-width: ${subStepPercentage}%" data-step="${step.step_no}" data-substep="${subStep.sub_step_no}">
