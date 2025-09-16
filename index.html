@@ -4,46 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="darkreader-lock">
     <title>A2Z DSA Course Roadmap</title>
     <style>
         :root {
-            /* New theme based on the image provided */
-            --primary-color: #363f5f;
-            /* Main blue for collapsible headers */
-            --primary-hover-color: #4a5588;
+            /* Theme based on the provided image */
+            --primary-color: #404269;
+            /* Dark blue/purple for collapsible headers */
+            --primary-hover-color: #53557E;
             /* Lighter blue for hover */
-            --success-color: #33a950;
-            /* Green for completed sections */
-            --success-hover-color: #45a049;
-            /* Lighter green for hover on completed */
+            --success-color: #1a8f47;
+            /* Green for active/completed sections */
+            --success-hover-color: #25a95a;
+            /* Lighter green for hover */
 
-            --medium-gray: #1e2124;
-            /* Main page background */
-            --white-color: #2d2d2d;
-            /* Container background */
-            --border-color: #40444b;
-            /* Borders for container and tables */
+            --medium-gray: #282828;
+            /* Dark grey page background */
+            --white-color: #353535;
+            /* Lighter dark grey for the main container */
+            --border-color: #505050;
+            /* Borders for tables and elements */
 
             --text-color: #ffffff;
-            /* Main text color */
+            /* Main text color for headings */
             --dark-gray: #e0e4e8;
-            /* Text color for table headers */
-            --light-gray: #2c2f33;
-            /* Background for table headers */
+            /* Lighter text for table content */
+            --light-gray: #303030;
+            /* Slightly darker background for table headers */
 
             --link-color: #8ea1e9;
             /* Link color */
-            --warning-color: #faa61a;
-            /* Difficulty indicator: Medium */
-            --danger-color: #f04747;
-            /* Difficulty indicator: Hard */
+            --warning-color: #f5a623;
+            /* Difficulty indicator: Medium (Orange) */
+            --danger-color: #e52d27;
+            /* Difficulty indicator: Hard (Red) */
 
-            --completed-bg-color: rgba(51, 169, 80, 0.1);
-            /* Row highlight for completed topics */
+            --completed-bg-color: rgba(26, 143, 71, 0.1);
+            /* Subtle background for completed rows */
             --completed-text-color: #63e6be;
             /* Text color for completed topics */
 
-            /* Progress bar is a semi-transparent overlay that works on blue and green backgrounds */
             --progress-bar-bg: var(--success-color);
         }
 
@@ -342,9 +342,38 @@
         }
 
         .status-checkbox {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            margin: auto;
+            font: inherit;
+            color: var(--dark-gray);
+            width: 1.15em;
+            height: 1.15em;
+            border: 0.15em solid currentColor;
+            border-radius: 0.15em;
+            display: grid;
+            place-content: center;
             pointer-events: none;
-            width: 1.3rem;
-            height: 1.3rem;
+        }
+
+        .status-checkbox::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+            transform: scale(0);
+            transform-origin: bottom left;
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--success-color);
+        }
+
+        .status-checkbox:checked {
+            border-color: var(--success-color);
+        }
+
+        .status-checkbox:checked::before {
+            transform: scale(1);
         }
     </style>
 </head>
@@ -414,7 +443,7 @@
                         const subStepProgressClass = isSubStepComplete ? 'completed' : '';
                         const subStepPercentage = totalSubStepTopics > 0 ? (completedSubStepTopics / totalSubStepTopics) * 100 : 0;
                         totalStepTopics += totalSubStepTopics;
-                        completedStepTopics += completedSubStepTopics;
+                        completedStepTopics += completedStepTopics;
 
                         subStepsHtml += `
                                 <button type="button" class="sub-collapsible ${subStepProgressClass}" style="--progress-width: ${subStepPercentage}%" data-step="${step.step_no}" data-substep="${subStep.sub_step_no}">
