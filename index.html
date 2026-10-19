@@ -431,7 +431,7 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('a2z.json').then(response => {
+            fetch(`a2z.json?t=${Date.now()}`, { cache: 'no-store' }).then(response => {
                 if (!response.ok) throw new Error('Network response was not ok. Make sure a2z.json is in the same folder.');
                 return response.json();
             }).then(roadmapData => {
